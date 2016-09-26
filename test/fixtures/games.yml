@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  starts_at: 2016-09-26 14:28:36
+  winner: 1
+  loser: 1
+  winner_score: 1
+  loser_score: 1
+
+two:
+  starts_at: 2016-09-26 14:28:36
+  winner: 1
+  loser: 1
+  winner_score: 1
+  loser_score: 1
