@@ -30,9 +30,9 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 gem 'font-awesome-rails'
 gem "devise"
-gem 'google-api-client', :require => 'google/api_client'
-gem 'omniauth'
-gem "omniauth-google-oauth2"
+# gem 'google-api-client', :require => 'google/api_client'
+# gem 'omniauth'
+# gem "omniauth-google-oauth2"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
