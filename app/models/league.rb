@@ -4,5 +4,5 @@ class League < ApplicationRecord
   has_many :players, through: :teams
 
   validates :sport, presence: true
-  vlaidates :skill_level, presence: true
+  validates :skill_level, presence: true
 end
