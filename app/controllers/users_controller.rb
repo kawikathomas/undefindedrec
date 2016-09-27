@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     @user.update_attributes(admin: params[:user][:admin])
   end
 
-  def addleagueid
+  def join
     @user = current_user
     @user.update_attributes(league_id: [params[:league_id]])
   end

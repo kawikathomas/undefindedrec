@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :teams, through: :team_players
   has_many :team_games, through: :teams
   has_many :games, through: :team_games
+  belongs_to :league
 
 
   # Include default devise modules. Others available are:
