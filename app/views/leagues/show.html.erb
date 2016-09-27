@@ -1,64 +1,122 @@
 <div>
-  <div class="container">
-    <div id="upcomingGames" class="col-lg-12 text-center upcoming-games">
-      <h2 class="section-heading">Upcoming Events</h2>
-      <ul>
+  <div class="row">
+    <div class="col-lg-12 games-schedule upcoming-games">
+      <h2 class="section-heading text-center">Todays Games</h2>
         <% @leagues.each do |league| %>
           <% league.games.each do |game| %>
-            <li><%= league.skill_level.capitalize %> <%= league.sport.capitalize %> game starts at <%= game.starts_at %></li>
+              <% if game.starts_at.strftime("%m/%d") == Time.now.strftime("%m/%d") %>
+                <div class="container text-center">
+                  <div class="row games-team">
+                      <div class="col-lg-5">
+                          <!-- <img src="http://placehold.it/115x67" alt="Bangladesh"> -->
+                          <h5><%= game.teams.first.name %></h5>
+                      </div>
+                      <div class="col-lg-2">
+                          <h4 class="img-circle">VS</h4>
+                      </div>
+                      <div class="col-lg-5">
+                          <!-- <img src="http://placehold.it/115x67" alt="Australia"> -->
+                          <h5><%= game.teams.last.name %></h5>
+                      </div>
+                  </div>
+                  <div class="row games-info">
+                      <div class="col-lg-12">
+                          <p>Starts at: <%= game.starts_at.strftime("%I:%M %p") %></p>
+                          <p class="games-dash"></p>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
-      </ul>
-    </div> <!-- Up coming games div -->
-    <div id="rankings" class="col-lg-6 text-center">
-      <h2>Competive Standings</h2>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Ranking</th>
-            <th>Team</th>
-            <th>Record</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @competitives.each do |league| %>
-            <% counter = 1 %>
-            <% league.teams.each do |team| %>
-              <tr>
-                <td><%= counter %></td>
-                <td><%= team.name %></td>
-                <td><%= team.wins %></td>
-              </tr>
-            <% counter += 1 %>
-            <% end %>
-          <% end %>
-        </tbody>
-      </table>
+      </div>
     </div>
-    <div id="rankings" class="col-lg-6 text-center">
-      <h2>Casual Standings</h2>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Ranking</th>
-            <th>Team</th>
-            <th>Record</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @casuals.each do |league| %>
-            <% counter = 1 %>
-            <% league.teams.each do |team| %>
-              <tr>
-                <td><%= counter %></td>
-                <td><%= team.name %></td>
-                <td>Wins: <%= team.wins %> Losses: <%= team.losses %></td>
-              </tr>
-            <% counter += 1 %>
+    <div class="container rankings">
+      <div class="col-lg-6 text-center">
+        <h2>Competive Standings</h2>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Ranking</th>
+              <th>Team</th>
+              <th>Record</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @competitives.each do |league| %>
+              <% counter = 1 %>
+              <% league.teams.each do |team| %>
+                <tr>
+                  <td><%= counter %></td>
+                  <td><%= team.name %></td>
+                  <td><%= team.wins %></td>
+                </tr>
+              <% counter += 1 %>
+              <% end %>
             <% end %>
-          <% end %>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+        <%= form_for(:user, url: '/users/addleagueid', method: "PUT") do %>
+          <input type="hidden" name="league_id" value="1">
+          <div class="form-group field">
+            <button type="submit" class="btn btn-success">Join Our League</button>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-lg-6 text-center">
+        <h2>Casual Standings</h2>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Ranking</th>
+              <th>Team</th>
+              <th>Record</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @casuals.each do |league| %>
+              <% counter = 1 %>
+              <% league.teams.order(wins: :DESC).each do |team| %>
+                <tr>
+                  <td><%= counter %></td>
+                  <td><%= team.name %></td>
+                  <td>Wins: <%= team.wins %> Losses: <%= team.losses %></td>
+                </tr>
+              <% counter += 1 %>
+              <% break if counter == 5 %>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
+  <div class="container">
+    <div class="col-lg-12 text-center">
+        <h2>All Games</h2>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th class="text-center">Sport</th>
+              <th class="text-center">League</th>
+              <th class="text-center">Date</th>
+              <th class="text-center">Start Time</th>
+            </tr>
+          </thead>
+          <tbody>
+           <% @leagues.each do |league| %>
+              <% league.games.each do |game| %>
+                <tr>
+                  <td><%= league.sport.capitalize %></td>
+                  <td><%= league.skill_level.capitalize %></td>
+                  <td><%= game.starts_at.strftime("%A, %b %d") %></td>
+                  <td><%= game.starts_at.strftime("%I:%M %p") %></td>
+                </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div> <!-- Up coming games div -->
 </div>
