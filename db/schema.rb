@@ -17,8 +17,6 @@ ActiveRecord::Schema.define(version: 20160926213014) do
 
   create_table "games", force: :cascade do |t|
     t.datetime "starts_at"
-    t.integer  "home_team_id"
-    t.integer  "away_team_id"
     t.integer  "winner"
     t.integer  "loser"
     t.integer  "winner_score"
