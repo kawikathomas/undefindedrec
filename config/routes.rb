@@ -16,7 +16,11 @@ Rails.application.routes.draw do
   end
 
 
-  # get '/admins/users/:id/edit' => 'admins#edit', as: 'admins_edit'
-  # get '/admins/profile' => 'admins#show'
-  # get '/admins/teams/new' => 'admins/team#new', as: 'admins_team'
+
+  put '/users/join' => 'users#join'
+
+  # admin
+  get '/admins/:id/edit' => 'admins#edit', as: 'admins_edit'
+  # patch '/admins/:id' => 'admins#update'
+
 end

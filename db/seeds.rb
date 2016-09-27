@@ -5,23 +5,52 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-league = League.create!(sport: "basketball", skill_level: "casual")
-league2 = League.create!(sport: "volleyball", skill_level: "casual")
-user1 = User.create!(email: "joe@me.com", password: "password", name: "Joey", admin: true)
-user2 = User.create!(email: "joe2@movie.com", password: "password", name: "Joey")
-user3 = User.create!(email: "joe3@as.com", password: "password", name: "Joey")
 
-team = Team.create!(name: "Salamanders", wins: 1, losses: 4, ties: 0, league_id: 1)
+League.create!(sport: "basketball", skill_level: "casual")
+League.create!(sport: "basketball", skill_level: "competitive")
+League.create!(sport: "volleyball", skill_level: "casual")
+League.create!(sport: "volleyball", skill_level: "competitive")
 
-team2 = Team.create!(name: "Gophers", wins: 0, losses: 4, ties: 1, league_id: 1)
 
-game1 = Game.create!(starts_at: '2014-08-21 18:14:12', winner: 1, loser: 2, league_id: 1)
+40.times do
+  User.create!(email: Faker::Internet.email, password: "password", name: Faker::StarWars.character, league_id: rand(1..4))
+end
 
-team_player = TeamPlayer.create!(player_id: 1, team_id: 1)
-team_player1 = TeamPlayer.create!(player_id: 2, team_id: 2)
-team_player2 = TeamPlayer.create!(player_id: 3, team_id: 2)
+# User.create!(email: "test@test.com", password: "123456", name: "Joey", league_id: rand(1..4), admin: true)
 
-team_games = TeamGame.create!(team_id: 1, game_id: 1)
-team_games2 = TeamGame.create!(team_id: 2, game_id: 1)
+10.times do
+  Team.create!(name: Faker::Team.creature, wins: rand(0..10), losses: rand(0..10), ties: 0, league_id: 2)
+end
+10.times do
+  Team.create!(name: Faker::Team.creature, wins: rand(0..10), losses: rand(0..10), ties: 0, league_id: 4)
+end
+10.times do
+  Team.create!(name: Faker::Team.creature, wins: rand(0..10), losses: rand(0..10), ties: 0, league_id: 1)
+end
+10.times do
+  Team.create!(name: Faker::Team.creature, wins: rand(0..10), losses: rand(0..10), ties: 0, league_id: 3)
+end
 
+counter = 1
+20.times do
+  TeamPlayer.create!(player_id: counter, team_id: rand(1..10))
+  counter += 1
+end
+
+6.times do
+  Game.create!(starts_at: Faker::Date.forward(30), league_id: rand(1..4))
+end
+
+TeamGame.create!(team_id: 1, game_id: 1)
+TeamGame.create!(team_id: 2, game_id: 1)
+TeamGame.create!(team_id: 3, game_id: 2)
+TeamGame.create!(team_id: 4, game_id: 2)
+TeamGame.create!(team_id: 5, game_id: 3)
+TeamGame.create!(team_id: 6, game_id: 3)
+TeamGame.create!(team_id: 7, game_id: 4)
+TeamGame.create!(team_id: 8, game_id: 4)
+TeamGame.create!(team_id: 9, game_id: 5)
+TeamGame.create!(team_id: 10, game_id: 5)
+TeamGame.create!(team_id: 1, game_id: 6)
+TeamGame.create!(team_id: 2, game_id: 6)
 
