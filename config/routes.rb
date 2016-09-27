@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :leagues
+  resources :teams, only: [:show]
   root "home#index"
 
   # users
@@ -8,7 +9,13 @@ Rails.application.routes.draw do
   get '/profile/edit' => 'users#edit'
   patch '/profile' => 'users#update'
 
-  # admin
-  get '/admins/:id/edit' => 'admins#edit', as: 'admins_edit'
-  # patch '/admins/:id' => 'admins#update'
+
+  namespace :admin do
+    resources :users, only: [:edit, :update]
+  end
+
+
+  # get '/admins/users/:id/edit' => 'admins#edit', as: 'admins_edit'
+  # get '/admins/profile' => 'admins#show'
+  # get '/admins/teams/new' => 'admins/team#new', as: 'admins_team'
 end

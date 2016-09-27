@@ -6,6 +6,14 @@ class AdminsController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
 
+  def show
+    @games = Game.all
+  end
+
+  def teamnew
+    @team = Team.new
+  end
+
 private
   def user_admin?
     current_user.admin == true
