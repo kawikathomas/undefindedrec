@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   def update
     @user = User.find_by(id: params[:user][:user_id])
     @user.update_attributes(admin: params[:user][:admin])
@@ -8,4 +9,7 @@ class UsersController < ApplicationController
     @user = current_user
     @user.update_attributes(league_id: [params[:league_id]])
   end
+
+
+
 end

@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 league = League.create!(sport: "basketball", skill_level: "casual")
 league2 = League.create!(sport: "volleyball", skill_level: "casual")
-user1 = User.create!(email: "joe@me.com", password: "password", name: "Joey")
+user1 = User.create!(email: "joe@me.com", password: "password", name: "Joey", admin: true)
 user2 = User.create!(email: "joe2@movie.com", password: "password", name: "Joey")
 user3 = User.create!(email: "joe3@as.com", password: "password", name: "Joey")
 
