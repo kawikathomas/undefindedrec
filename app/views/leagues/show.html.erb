@@ -1,0 +1,64 @@
+<div>
+  <div class="container">
+    <div id="upcomingGames" class="col-lg-12 text-center upcoming-games">
+      <h2 class="section-heading">Upcoming Events</h2>
+      <ul>
+        <% @leagues.each do |league| %>
+          <% league.games.each do |game| %>
+            <li><%= league.skill_level.capitalize %> <%= league.sport.capitalize %> game starts at <%= game.starts_at %></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div> <!-- Up coming games div -->
+    <div id="rankings" class="col-lg-6 text-center">
+      <h2>Competive Standings</h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Ranking</th>
+            <th>Team</th>
+            <th>Record</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @competitives.each do |league| %>
+            <% counter = 1 %>
+            <% league.teams.each do |team| %>
+              <tr>
+                <td><%= counter %></td>
+                <td><%= team.name %></td>
+                <td><%= team.wins %></td>
+              </tr>
+            <% counter += 1 %>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div id="rankings" class="col-lg-6 text-center">
+      <h2>Casual Standings</h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Ranking</th>
+            <th>Team</th>
+            <th>Record</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @casuals.each do |league| %>
+            <% counter = 1 %>
+            <% league.teams.each do |team| %>
+              <tr>
+                <td><%= counter %></td>
+                <td><%= team.name %></td>
+                <td>Wins: <%= team.wins %> Losses: <%= team.losses %></td>
+              </tr>
+            <% counter += 1 %>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
