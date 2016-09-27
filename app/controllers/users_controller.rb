@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
 
   def update
     @user = User.find_by(id: params[:user][:user_id])
@@ -7,7 +8,8 @@ class UsersController < ApplicationController
 
   def join
     @user = current_user
-    @user.update_attributes(league_id: [params[:league_id]])
+    @user.update!(league_id: params[:league_id])
+
   end
 
 

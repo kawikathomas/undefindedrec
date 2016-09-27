@@ -18,17 +18,17 @@ end
 
 # User.create!(email: "test@test.com", password: "123456", name: "Joey", league_id: rand(1..4), admin: true)
 
-10.times do
-  Team.create!(name: Faker::Team.creature, wins: rand(0..10), losses: rand(0..10), ties: 0, league_id: 2)
+10.times do |i|
+  Team.create!(name: "#{Faker::Team.creature}-#{i}", wins: rand(0..10), losses: rand(0..10), ties: 0, league_id: 2)
 end
-10.times do
-  Team.create!(name: Faker::Team.creature, wins: rand(0..10), losses: rand(0..10), ties: 0, league_id: 4)
+10.times do |i|
+  Team.create!(name: "#{Faker::Team.creature}-#{i}", wins: rand(0..10), losses: rand(0..10), ties: 0, league_id: 4)
 end
-10.times do
-  Team.create!(name: Faker::Team.creature, wins: rand(0..10), losses: rand(0..10), ties: 0, league_id: 1)
+10.times do |i|
+  Team.create!(name: "#{Faker::Team.creature}-#{i}", wins: rand(0..10), losses: rand(0..10), ties: 0, league_id: 1)
 end
-10.times do
-  Team.create!(name: Faker::Team.creature, wins: rand(0..10), losses: rand(0..10), ties: 0, league_id: 3)
+10.times do |i|
+  Team.create!(name: "#{Faker::Team.creature}-#{i}", wins: rand(0..10), losses: rand(0..10), ties: 0, league_id: 3)
 end
 
 counter = 1

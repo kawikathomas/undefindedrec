@@ -33,7 +33,7 @@
     <div class="container rankings">
       <div class="col-lg-6 text-center">
         <h2>Competive Standings</h2>
-        <table class="table table-bordered">
+        <table class="table table-bordered table-striped">
           <thead>
             <tr>
               <th>Ranking</th>
@@ -55,17 +55,19 @@
               <% end %>
           </tbody>
         </table>
-        <%= form_for(:user, url: '/users/addleagueid', method: "PUT") do %>
-          <input type="hidden" name="league_id" value=<%= league.id %>>
-          <div class="form-group field">
-            <button type="submit" class="btn btn-success">Join Our League</button>
-          </div>
+        <% if current_user && current_user.league_id == nil %>
+          <%= form_for(:user, url: '/users/join', method: "PUT") do %>
+            <input type="hidden" name="league_id" value=<%= league.id %>>
+            <div class="form-group field">
+              <button type="submit" class="btn btn-success">Join Our League</button>
+            </div>
+            <% end %>
           <% end %>
         <% end %>
       </div>
       <div class="col-lg-6 text-center">
         <h2>Casual Standings</h2>
-        <table class="table table-bordered">
+        <table class="table table-bordered table-striped">
           <thead>
             <tr>
               <th>Ranking</th>
@@ -87,20 +89,22 @@
               <% end %>
           </tbody>
         </table>
-    <%= form_for(:user, url: '/users/addleagueid', method: "PUT") do %>
-        <input type="hidden" name="league_id" value=<%= league.id %>>
+      <% if current_user && current_user.league_id == nil %>
+        <%= form_for(:user, url: '/users/join', method: "PUT") do %>
+          <input type="hidden" name="league_id" value=<%= league.id %>>
+          <div class="form-group field">
+            <button type="submit" class="btn btn-success">Join Our League</button>
+          </div>
+          <% end %>
         <% end %>
-        <div class="form-group field">
-          <button type="submit" class="btn btn-success">Join Our League</button>
-        </div>
-      <% end %>
+        <% end %>
       </div>
     </div>
   </div>
   <div class="container">
     <div class="col-lg-12 text-center">
         <h2>All Games</h2>
-        <table class="table table-bordered">
+        <table class="table table-bordered table-striped">
           <thead>
             <tr>
               <th class="text-center">Sport</th>
