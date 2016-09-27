@@ -1,0 +1,21 @@
+<%=simple_form_for @game, url: admin_games_path do |f| %>
+  <%= f.input :starts_at, as: :date, html5: true %>
+  <%= f.association :league, label_method: :sport, prompt: "Choose a Sport"  %>
+  <%= f.simple_fields_for @team_game do |team_game_form| %>
+    <%= team_game_form.association :team, input_html: { name: "team_game[team1]"} %>
+    <%= team_game_form.association :team, input_html: { name: "team_game[team2]"} %>
+  <% end %>
+
+  <%= f.button :submit, "Pick Teams", class:"btn-primary" %>
+
+  <%# f.input :team, :collection => @teams %>
+
+
+
+<%# simple_form_for @team_game, url: admin_games_path do |f| %>
+  <%# f.association :team %>
+  <%# f.association :team %>
+  <%# f.button :submit, "Create Game", class: "btn-primary" %>
+<% end %>
+
+
