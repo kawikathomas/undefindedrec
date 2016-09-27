@@ -1,7 +1,7 @@
 class TeamsController < ApplicationController
 
   def show
-    @teams = current_user.teams
+    @team = Team.find_by(id: params[:id])
   end
 
 end
