@@ -3,8 +3,8 @@
     <div class="col-lg-12 games-schedule upcoming-games">
       <h2 class="section-heading text-center">Todays Games</h2>
         <% @leagues.each do |league| %>
-          <% league.games.each do |game| %>
-              <% if game.starts_at.strftime("%m/%d") == Time.now.strftime("%m/%d") %>
+          <% if league.games.today%>
+            <% league.games.today.each do |game| %>
                 <div class="container text-center">
                   <div class="row games-team">
                       <div class="col-lg-5">
@@ -42,26 +42,23 @@
             </tr>
           </thead>
           <tbody>
-            <% @competitives.each do |league| %>
-              <% counter = 1 %>
-              <% league.teams.order(wins: :DESC).each do |team| %>
+            <% @leagues.competitive.each do |league| %>
+              <% league.teams.order(wins: :DESC).limit(4).each_with_index do |team,index| %>
                 <tr>
-                  <td><%= counter %></td>
+                  <td><%= index+1 %></td>
                   <td><%= team.name %></td>
                   <td>Wins: <%= team.wins %> Losses: <%= team.losses %></td>
                 </tr>
-              <% counter += 1 %>
-              <% break if counter == 5 %>
               <% end %>
+            <% end %>
           </tbody>
         </table>
         <% if current_user && current_user.league_id == nil %>
           <%= form_for(:user, url: '/users/join', method: "PUT") do %>
-            <input type="hidden" name="league_id" value=<%= league.id %>>
+            <input type="hidden" name="league_id" value=<%= @leagues.competitive.first.id %>>
             <div class="form-group field">
               <button type="submit" class="btn btn-success">Join Our League</button>
             </div>
-            <% end %>
           <% end %>
         <% end %>
       </div>
@@ -76,27 +73,24 @@
             </tr>
           </thead>
           <tbody>
-            <% @casuals.each do |league| %>
-              <% counter = 1 %>
-              <% league.teams.order(wins: :DESC).each do |team| %>
+            <% @leagues.casual.each do |league| %>
+              <% league.teams.order(wins: :DESC).limit(4).each_with_index do |team,index| %>
                 <tr>
-                  <td><%= counter %></td>
+                  <td><%= index+1 %></td>
                   <td><%= team.name %></td>
                   <td>Wins: <%= team.wins %> Losses: <%= team.losses %></td>
                 </tr>
-              <% counter += 1 %>
-              <% break if counter == 5 %>
               <% end %>
+            <% end %>
           </tbody>
         </table>
       <% if current_user && current_user.league_id == nil %>
         <%= form_for(:user, url: '/users/join', method: "PUT") do %>
-          <input type="hidden" name="league_id" value=<%= league.id %>>
+          <input type="hidden" name="league_id" value=<%= @leagues.casual.first.id %>>
           <div class="form-group field">
             <button type="submit" class="btn btn-success">Join Our League</button>
           </div>
           <% end %>
-        <% end %>
         <% end %>
       </div>
     </div>

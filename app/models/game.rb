@@ -6,4 +6,6 @@ class Game < ApplicationRecord
 
   validates :starts_at, presence: true
   validates :league_id, presence: true
+
+  scope :today, ->{ where(starts_at: Date.today) }
 end
