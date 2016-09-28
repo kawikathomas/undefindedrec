@@ -14,7 +14,13 @@ class Admin::GamesController < ApplicationController
   end
 
   def edit
-    @game = Game.find_by(params[:game_id])
+    @game = Game.find(params[:id])
+    @teams = @game.teams
   end
 
+  def update
+    @game = Game.find(params[:id])
+    @game.update(winner: params[:game][:winner], winner_score:params[:game][:winner_score], loser: params[:game][:loser], loser_score:params[:game][:loser_score] )
+    redirect_to admin_profile_path
+  end
 end

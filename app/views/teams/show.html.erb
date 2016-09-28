@@ -19,11 +19,7 @@
                   <td><%= game.teams[0].name %> vs. <%= game.teams[1].name %></td>
                   <td><%= game.starts_at.strftime("%A, %b %d") %></td>
                   <td><%= game.starts_at.strftime("%I:%M %p") %></td>
-                  <% if game.winner == @team.id %>
-                    <td> Won </td>
-                  <% else %>
-                    <td>Loss</td>
-                  <%end %>
+                  <td><%= @team.game_result(game) %></td>
                   <td><%= game.winner_score %> - <%= game.loser_score %></td>
                 </tr>
               <% end %>
