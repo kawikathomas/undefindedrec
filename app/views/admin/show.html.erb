@@ -30,10 +30,10 @@
     <div>
     <% @leagues.each do |league| %>
       <div class="container col-lg-12 text-center">
-        <h2><%= league.sport.capitalize %></h2>
+        <h2><%= league.skill_level.capitalize%> <%=league.sport.capitalize %></h2>
           <div id="create-team" class="col-lg-3 col-lg-offset-3 text-center create-team">
             <h3 class="section-heading">Create a Team</h3>
-              <%= link_to "Add a team", new_admin_team_path, class: "btn btn-primary" %>
+              <%= link_to "Add a team", new_admin_team_path(:league_id => league.id), class: "btn btn-primary" %>
           </div>
 
           <div id="schedule-game" class="col-lg-3 text-center schedule-game">
