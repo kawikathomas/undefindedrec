@@ -1,4 +1,4 @@
-<div class="container">
+<div id="dragable-container" class="container">
   <div class="col-lg-4 text-center">
     <h2>Available Players</h2>
       <table id="available-players" class="table table-bordered">
@@ -18,39 +18,34 @@
           </tbody>
         </table>
   </div>
-  <div class="col-lg-4 col-lg-offset-2 text-center">
-    <h2>New Team</h2>
-      <table id="new-team" class="table table-bordered">
-        <thead>
-          <tr>
-            <th class="text-center">Name</th>
-            <th class="text-center">User Id</th>
-          </tr>
-        </thead>
-          <tbody>
-            <!-- <tr>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-            </tr> -->
+  <div id="new-team-div" class="col-lg-4 col-lg-offset-2 text-center">
+    <h2 class="section-heading">Add Team</h2>
+    <%= form_for(:team, url: '/admin/teams', method: "POST", :html => {:id => "create-team-form"}) do |f| %>
+          <input type="hidden" name="league_id" value=<%= @league %>>
+          <div class="form-group field">
+            <%= f.label "Team Name" %>:<br />
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+          <div class="form-group field">
+            <button id="create-team-btn" type="submit" class="btn btn-success">Create Team</button>
+          </div>
+      <% end %>
+  </div>
 
-          </tbody>
-        </table>
+</div>
+<br>
+<br>
+<div class="container">
+  <div class="col-lg-4 text-center">
+    <div class="form-group field">
+      <button id="another-team-btn" type="submit" class="btn btn-success">Add Another Team</button>
     </div>
+  </div>
+  <div class="col-lg-4 col-lg-offset-2 text-center">
+    <%= form_for(:user, url: '/admin/profile', method: "GET") do %>
+      <div class="form-group field">
+        <button type="submit" class="btn btn-success">Return To Profile</button>
+      </div>
+    </div>
+  <% end %>
 </div>

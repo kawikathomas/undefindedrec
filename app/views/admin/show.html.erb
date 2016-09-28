@@ -45,5 +45,24 @@
     </div>
 
 
+<div>
+    <% @teams.each do |team| %>
+      <div class="container col-lg-12 text-center">
+        <a href="/teams/<%=team.id%>"><%= team.name.capitalize %></a>
+      </div>
+      <% end %>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
   </div>
 </div>
