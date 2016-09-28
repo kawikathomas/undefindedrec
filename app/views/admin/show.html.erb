@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <div>
+  <div>
     <% @leagues.each do |league| %>
       <div class="container col-lg-12 text-center">
         <h2><%= league.skill_level.capitalize%> <%=league.sport.capitalize %></h2>
@@ -43,26 +43,30 @@
         </div>
       <% end %>
     </div>
-
-
-<div>
-    <% @teams.each do |team| %>
-      <div class="container col-lg-12 text-center">
-        <a href="/teams/<%=team.id%>"><%= team.name.capitalize %></a>
-      </div>
-      <% end %>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
   </div>
 </div>
+
+<div id="team-container" class="container">
+  <% @leagues.each do |league| %>
+    <div  class="text-center col-lg-3">
+      <h4 class="section-heading"><%= league.skill_level.capitalize %> <%= league.sport.capitalize %></h4>
+      <% league.teams.each do |team| %>
+        <ul class="teams-list">
+          <li><a href="/teams/<%=team.id%>"><%= team.name.capitalize %></a></li>
+        </ul>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
