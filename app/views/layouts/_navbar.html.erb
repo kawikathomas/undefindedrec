@@ -25,7 +25,11 @@
           <% if current_user.teams.first != nil %>
             <li><a href="/teams/<%= current_user.teams.first.id %>">My Team</a></li>
           <% end %>
-          <li><a href="/profile">Profile</a></li>
+          <% if current_user.admin == true %>
+            <li><a href="/admin/profile">Profile</a></li>
+          <% else %>
+            <li><a href="/profile">Profile</a></li>
+          <% end %>
           <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
         <% else %>
           <li><%= link_to "Login", new_user_session_path %></li>

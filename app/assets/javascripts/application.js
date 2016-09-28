@@ -24,8 +24,8 @@ $(document).ready(function(){
   $("#new-team").droppable({
       drop: function (e, ui) {
       $(ui.draggable).appendTo($(this));
-      // var name = $(this).find(".item_name:last").text()
-      // var price = $(this).find(".item_price:last").text()
+      var user_id = $(this).find(".id").text()
+      console.log(user_id)
       // price = Number(price);
       // item = new GroceryItem(name, price)
       // grocery_list.addItem(item)
