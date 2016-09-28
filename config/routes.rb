@@ -19,9 +19,9 @@ Rails.application.routes.draw do
   end
 
   put '/users/join' => 'users#join', as: 'user_join'
-
   # admin
   get '/admins/:id/edit' => 'admins#edit', as: 'admins_edit'
   get '/admin/profile' => 'admin#show'
+  post "/admin/teams/teamplayer" => "admin/teams#teamplayer", as: 'admin_teamplayer'
 
 end
