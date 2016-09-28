@@ -4,7 +4,7 @@ class Game < ApplicationRecord
   has_many :teams, through: :team_games
   has_many :players, through: :teams
   belongs_to :league
-  belongs_to :winner, class_name: :Team
+  belongs_to :winner, class_name: :Team, optional: true
 
   validates :starts_at, presence: true
   validates :league_id, presence: true
@@ -25,5 +25,12 @@ class Game < ApplicationRecord
     else
       return "#{self.winner_score} - #{self.loser_score}"
     end
+  end
+
+  def as_json(options = {})
+    h = super(options)
+    h[:starts_at_str] = starts_at.strftime("%A, %b %d")
+    h[:starts_at_time_str] = starts_at.strftime("%I:%M %p")
+    return h
   end
 end
