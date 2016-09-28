@@ -22,6 +22,19 @@ class Admin::TeamsController < ApplicationController
     end
   end
 
+
+  def edit
+    @team = Team.find_by(id: params[:id])
+    @league = params[:league_id]
+    players = User.where(league_id: params[:league_id])
+    @players = []
+    players.each do |player|
+      if player.teams.length == 0
+        @players.push(player)
+      end
+    end
+  end
+
   def teamplayer
     TeamPlayer.create(player_id: params[:user_id], team_id: params[:team_id])
   end

@@ -1,0 +1,60 @@
+<div id="dragable-container" class="container">
+  <div class="col-lg-4 text-center">
+    <h2>Available Players</h2>
+    <table id="available-players" class="table table-bordered">
+      <thead>
+        <tr>
+          <th class="text-center">Name</th>
+          <th class="text-center">User Id</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @players.each do |player| %>
+          <tr class="player">
+            <td><%= player.name %></td>
+            <td class="id"><%= player.id %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div id="edit-team-div" class="col-lg-4 col-lg-offset-2 text-center">
+    <h2 class="section-heading"><%= @team.name %></h2>
+    <table id='edit-team' class='table table-bordered'>
+      <thead>
+        <tr>
+          <th class='text-center'>Name</th>
+          <th class='text-center'>User Id</th>
+        </tr>
+      </thead>
+      <tbody  class="teamid" id='<%= @team.id %>'>
+        <% @team.players.each do |player| %>
+          <tr>
+            <td><%= player.name %></td>
+            <td><%= player.id %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+<br>
+
+<div class="container">
+  <div class="col-lg-4 text-center">
+    <%= form_for(:teams, url: "/teams/#{@team.id}", method: "GET") do %>
+      <div class="form-group field">
+        <button type="submit" class="btn btn-success">Return to Team Profile</button>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-lg-4 col-lg-offset-2 text-center">
+    <%= form_for(:user, url: '/admin/profile', method: "GET") do %>
+      <div class="form-group field">
+        <button type="submit" class="btn btn-success">Return To Profile</button>
+      </div>
+  </div>
+    <% end %>
+</div>

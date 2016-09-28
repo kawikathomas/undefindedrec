@@ -1,7 +1,7 @@
 <div>
   <div class="row">
     <div class="col-lg-12 games-schedule upcoming-games">
-      <h2 class="section-heading text-center">Todays Games</h2>
+      <h2 class="section-heading text-center">Todays <%= @leagues.first.sport.capitalize %> Games</h2>
         <% @leagues.each do |league| %>
           <% if league.games.today%>
             <% league.games.today.each do |game| %>

@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :leagues
-  resources :teams, only: [:show]
+  resources :teams, only: [:show, :destroy]
   root "home#index"
 
   # users
   get '/profile' => 'users#show', as: 'user'
   get '/profile/edit' => 'users#edit'
   patch '/profile' => 'users#update'
+  put "/admin/users/removeteam" => "admin/users#removeteam"
 
   namespace :admin do
     resources :users, only: [:edit, :update]

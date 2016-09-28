@@ -34,4 +34,18 @@ $(document).on("turbolinks:load", function(){
     e.preventDefault();
     location.reload();
   })
+
+  $("#remove-team-form").on("submit", function(e){
+    e.preventDefault();
+    var data = $(this).serialize();
+    var item = $(this).closest(".player-contact")
+    $.ajax({
+      method: "PUT",
+      url: "/admin/users/removeteam",
+      data: data
+    }).done(function(){
+      $(item).remove();
+    })
+  })
+
 })
