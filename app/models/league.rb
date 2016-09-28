@@ -6,4 +6,7 @@ class League < ApplicationRecord
 
   validates :sport, presence: true
   validates :skill_level, presence: true
+
+  scope :casual, ->{ where(skill_level: :casual) }
+  scope :competitive, ->{ where(skill_level: :competitive) }
 end
