@@ -46,6 +46,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry'
   gem 'rspec-rails'
+  gem 'rake'
 end
 
 group :development do
