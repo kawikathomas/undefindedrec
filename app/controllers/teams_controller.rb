@@ -5,4 +5,10 @@ class TeamsController < ApplicationController
     @games = @team.games
   end
 
+  def destroy
+    @team = Team.find(params[:id])
+    @team.destroy
+    redirect_to :root
+  end
+
 end
