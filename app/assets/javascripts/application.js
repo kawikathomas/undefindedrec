@@ -12,6 +12,25 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(document).ready(function(){
+  $("#available-players").find(".player").draggable({
+    helper: "clone"
+  });
+  $("#new-team").droppable({
+      drop: function (e, ui) {
+      $(ui.draggable).appendTo($(this));
+      var user_id = $(this).find(".id").text()
+      console.log(user_id)
+      // price = Number(price);
+      // item = new GroceryItem(name, price)
+      // grocery_list.addItem(item)
+      // // console.log(grocery_list)
+      // $("#total_cost").html(grocery_list.totalCost())
+    }
+  });
+})
