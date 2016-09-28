@@ -7,4 +7,13 @@ class Team < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :league_id, presence: true
+
+  def game_result(game)
+    if game.winner == self.id
+      return "Won"
+    else
+      return "Loss"
+    end
+  end
+
 end

@@ -1,0 +1,7 @@
+<%= simple_form_for @game, url: admin_league_game_path do |f| %>
+  <%= f.input :winner, collection: @teams  %>
+  <%= f.input :winner_score %>
+  <%= f.input :loser, collection: @teams %>
+  <%= f.input :loser_score %>
+  <%= f.submit %>
+<% end %>

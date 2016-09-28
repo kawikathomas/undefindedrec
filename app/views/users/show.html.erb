@@ -1,0 +1,30 @@
+<div>
+  <div class="container">
+    <div class="col-lg-12 text-center">
+      <h2>All Games</h2>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th class="text-center">Sport</th>
+              <th class="text-center">League</th>
+              <th class="text-center">Teams</th>
+              <th class="text-center">Date</th>
+              <th class="text-center">Start Time</th>
+            </tr>
+          </thead>
+            <tbody>
+              <% @games.each do |game| %>
+                <tr>
+                  <td><%= game.league.sport %></td>
+                  <td><%= game.league.skill_level %></td>
+                  <td><%= game.teams[0].name %> vs. <%= game.teams[1].name %></td>
+                  <td><%= game.starts_at.strftime("%A, %b %d") %></td>
+                  <td><%= game.starts_at.strftime("%I:%M %p") %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>
