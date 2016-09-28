@@ -7,4 +7,6 @@ class Team < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :league_id, presence: true
+
+
 end

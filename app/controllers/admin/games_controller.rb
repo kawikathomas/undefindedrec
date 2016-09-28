@@ -11,4 +11,8 @@ class Admin::GamesController < ApplicationController
     @team_game = TeamGame.create(game: @game, team_id: params[:team_game][:team2])
   end
 
+  def edit
+    @game = Game.find_by(params[:game_id])
+  end
+
 end
