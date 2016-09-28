@@ -1,4 +1,6 @@
 class Admin::GamesController < ApplicationController
+  # respond_to :js, :json, :html
+
   def new
     @game = Game.new
     @team_game = TeamGame.new
@@ -7,14 +9,19 @@ class Admin::GamesController < ApplicationController
   end
 
   def create
-    params
     hour = params[:game][:hour].to_i
     minutes = params[:game][:minutes].to_i
     starts_at = (params[:game][:starts_at].to_datetime).change(hour: hour, min: minutes)
-    p @game = Game.create(starts_at: starts_at, league_id: params[:league_id])
-    @team_game = TeamGame.create(game: @game, team_id: params[:team_game][:team1])
-    @team_game = TeamGame.create(game: @game, team_id: params[:team_game][:team2])
-    redirect_to new_admin_league_game_path
+    @game = Game.create(starts_at: starts_at, league_id: params[:league_id])
+    @team_game1 = TeamGame.create(game: @game, team_id: params[:team_game][:team1])
+    @team_game2 = TeamGame.create(game: @game, team_id: params[:team_game][:team2])
+    @teams = @game.teams
+    @league = @game.league
+    respond_to do |format|
+      format.json {
+        render json: [@game, @teams, @league]
+      }
+    end
   end
 
   def edit
