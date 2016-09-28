@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users, only: [:edit, :update]
     resources :teams, only: [:new, :create, :edit, :update, :destroy]
-    resources :games, only: [:new, :create, :edit, :update, :destroy]
+
+    resources :leagues do
+      resources :games, only: [:new, :create, :edit, :update, :destroy]
+    end
   end
 
   put '/users/join' => 'users#join', as: 'user_join'
