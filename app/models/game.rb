@@ -1,4 +1,5 @@
 class Game < ApplicationRecord
+  attr_accessor :hour, :minutes
   has_many :team_games
   has_many :teams, through: :team_games
   has_many :players, through: :teams

@@ -4,18 +4,23 @@
   <% end %>
 <% end %>
 
-<%=simple_form_for @game, url: admin_league_games_path do |f| %>
-  <%= f.input :starts_at, as: :date, html5: true %>
-  <%# f.association :league, label_method: lambda { |league| "#{league.sport} - #{league.skill_level}" }, prompt: "Choose a Sport"  %>
-  <%= f.simple_fields_for @team_game do |team_game_form| %>
-    <%= team_game_form.association :team, collection: Team.where(league_id: params[:league_id]), input_html: { name: "team_game[team1]"} %>
-    <%= team_game_form.association :team, collection: Team.where(league_id: params[:league_id]), input_html: { name: "team_game[team2]"} %>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <%=simple_form_for @game, url: admin_league_games_path, :html => { :class => "form-inline"  }    do |f| %>
+        <%= f.input :starts_at, as: :date, html5: true %>
+        <%= f.input :hour %>
+        <%= f.input :minutes %>
+        <%= f.simple_fields_for @team_game do |team_game_form|      %>
+          <%= team_game_form.association :team, collection:       Team.where(league_id: params[:league_id]),      input_html: { name: "team_game[team1]"} %>
+          <%= team_game_form.association :team, collection:       Team.where(league_id: params[:league_id]),      input_html: { name: "team_game[team2]"} %>
+        <% end %>
 
-  <%= f.button :submit, "Schedule Game", class:"btn-primary" %>
+        <%= f.button :submit, "Schedule Game", class:"      btn-primary" %>
 
-  <%# f.input :team, :collection => @teams %>
-
+    </div>
+  </div>
+</div>
 
 
 <%# simple_form_for @team_game, url: admin_games_path do |f| %>
