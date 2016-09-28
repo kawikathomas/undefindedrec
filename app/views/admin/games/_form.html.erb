@@ -1,0 +1,12 @@
+<%=simple_form_for @game, url: admin_league_games_path, :html => { class: "form-inline", id: :"new-game"  }, remote: true do |f| %>
+<%= f.input :starts_at, as: :date, html5: true, :html => { :class => "form-group"  } %>
+        <%= f.input :hour, :html => { :class => "form-group"  } %>
+        <%= f.input :minutes, :html => { :class => "form-group"  } %>
+        <%= f.simple_fields_for @team_game do |team_game_form|      %>
+          <%= team_game_form.association :team, collection:       Team.where(league_id: params[:league_id]),      input_html: { name: "team_game[team1]"}, :html => { :class => "form-group"  } %>
+          <%= team_game_form.association :team, collection:       Team.where(league_id: params[:league_id]),      input_html: { name: "team_game[team2]"}, :html => { :class => "form-group"  } %>
+        <% end %>
+
+<%= f.button :submit, "Schedule Game", class:" btn-primary" %>
+
+   <% end %>

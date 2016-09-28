@@ -7,16 +7,16 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-12 text-center">
-      <%=simple_form_for @game, url: admin_league_games_path, :html => { :class => "form-inline"  }    do |f| %>
-        <%= f.input :starts_at, as: :date, html5: true %>
-        <%= f.input :hour %>
-        <%= f.input :minutes %>
+      <%=simple_form_for @game, url: admin_league_games_path, :html => { class: "form-inline", id: "new-game"  }   do |f| %>
+        <%= f.input :starts_at, as: :date, html5: true, :html => { :class => "form-group"  } %>
+        <%= f.input :hour, :html => { :class => "form-group"  } %>
+        <%= f.input :minutes, :html => { :class => "form-group"  } %>
         <%= f.simple_fields_for @team_game do |team_game_form|      %>
-          <%= team_game_form.association :team, collection:       Team.where(league_id: params[:league_id]),      input_html: { name: "team_game[team1]"} %>
-          <%= team_game_form.association :team, collection:       Team.where(league_id: params[:league_id]),      input_html: { name: "team_game[team2]"} %>
+          <%= team_game_form.association :team, collection:       Team.where(league_id: params[:league_id]),      input_html: { name: "team_game[team1]"}, :html => { :class => "form-group"  } %>
+          <%= team_game_form.association :team, collection:       Team.where(league_id: params[:league_id]),      input_html: { name: "team_game[team2]"}, :html => { :class => "form-group"  } %>
         <% end %>
 
-        <%= f.button :submit, "Schedule Game", class:"      btn-primary" %>
+        <%= f.button :submit, "Schedule Game", class:" btn-primary" %>
 
     </div>
   </div>
@@ -30,9 +30,9 @@
 <% end %>
 
 <div class="container">
-    <div class="col-lg-12 text-center">
+    <div class="col-lg-12 text-center games">
       <h2><%= @league.sport.capitalize %> - <%= @league.skill_level.capitalize %> Games</h2>
-        <table class="table table-bordered">
+        <table class="table table-bordered upcoming-games">
           <thead>
             <tr>
               <th class="text-center">Sport</th>
@@ -45,11 +45,11 @@
             <tbody>
               <% @games.each do |game| %>
                 <tr>
-                  <td><%= game.league.sport %></td>
-                  <td><%= game.league.skill_level %></td>
-                  <td><%= game.teams[0].name %> vs. <%= game.teams[1].name %></td>
-                  <td><%= game.starts_at.strftime("%A, %b %d") %></td>
-                  <td><%= game.starts_at.strftime("%I:%M %p") %></td>
+                  <td id="list-sport"><%= game.league.sport %></td>
+                  <td id="list-skill-level"><%= game.league.skill_level %></td>
+                  <td id="list-teams"><%= game.teams[0].name %> vs. <%= game.teams[1].name %></td>
+                  <td id="list-date"><%= game.starts_at.strftime("%A, %b %d") %></td>
+                  <td id="list-start-time"><%= game.starts_at.strftime("%I:%M %p") %></td>
                 </tr>
               <% end %>
             </tbody>
