@@ -12,6 +12,7 @@
               <th class="text-center">Start Time</th>
               <th class="text-center">Winner</th>
               <th class="text-center">Score</th>
+              <th class="text-center">Update Game</th>
             </tr>
           </thead>
             <tbody>
@@ -24,6 +25,7 @@
                   <td><%= game.starts_at.strftime("%I:%M %p") %></td>
                   <td><%= game.result %></td>
                   <td> <%= game.return_score %></td>
+                  <td><%= link_to "Update", edit_admin_league_game_path(:league_id => game.league.id, :id => game.id), class: "btn btn-primary" %></td>
                 </tr>
               <% end %>
             </tbody>
